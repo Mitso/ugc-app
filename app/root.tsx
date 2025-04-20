@@ -13,10 +13,12 @@ export default function App({ children }: GlobalContextProviderProps) {
     const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false); // Explicitly type useState if desired
     return (
           <GlobalContext.Provider value={{
+                user: null,
+                setUser: () => {},
                 isEditorOpen,
                 setIsEditorOpen,
             }}>
-            { children}
+            { children }
             <Index />
         </GlobalContext.Provider>
     )
