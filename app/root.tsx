@@ -1,25 +1,16 @@
-import { type ReactNode, useState } from 'react';
-import { GlobalContext } from './context/GlobalContext';
-import { Index }  from './Index';
+import React from "react";
+import { GlobalProvider } from "./context/GlobalContext";
+import { Index } from "./Index";
 
-/* 
-    Define props for the provider component for better type safety
-*/
 interface GlobalContextProviderProps {
-    children: ReactNode; // Use ReactNode for children type
+  children: React.ReactNode;
 }
 
 export default function App({ children }: GlobalContextProviderProps) {
-    const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false); // Explicitly type useState if desired
-    return (
-          <GlobalContext.Provider value={{
-                user: null,
-                setUser: () => {},
-                isEditorOpen,
-                setIsEditorOpen,
-            }}>
-            { children }
-            <Index />
-        </GlobalContext.Provider>
-    )
-};
+  return (
+    <GlobalProvider>
+      {children}
+      <Index />
+    </GlobalProvider>
+  );
+}

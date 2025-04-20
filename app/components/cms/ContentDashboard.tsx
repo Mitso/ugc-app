@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { GlobalContext } from '../../context/GlobalContext';
+import { useGlobalState, useSetIsEditorOpen } from '../../context/GlobalContext';
 import type { ContentItem } from '../../types/content';
 
 import type { ContentDashboardProps } from '../../types/content';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
+
 import {
   Select,
   SelectContent,
@@ -38,7 +39,8 @@ const ContentDashboard = ({
   onEditContent = () => {},
   onDeleteContent = () => {},
 }: ContentDashboardProps) => {
-  const { isEditorOpen, setIsEditorOpen } = useContext(GlobalContext);
+  const { isEditorOpen } = useGlobalState();
+const setIsEditorOpen = useSetIsEditorOpen();
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");

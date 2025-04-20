@@ -2,7 +2,8 @@ import type { Route } from './+types/Layout';
 import { useContext,useState } from 'react';
 import { Outlet } from 'react-router';
 
-import { GlobalContext } from './context/GlobalContext';
+import { useGlobalState, useSetIsEditorOpen } from './context/GlobalContext';
+
 
 import './assets/css/app.css';
 import './assets/css/index.css';
@@ -19,8 +20,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 const Layout = () => {
-    const { isEditorOpen, setIsEditorOpen } = useContext(GlobalContext);
-    
+    const { isEditorOpen } = useGlobalState();
+    const setIsEditorOpen = useSetIsEditorOpen();
     const handleCreateContent = () => {
         setIsEditorOpen(true);
     }

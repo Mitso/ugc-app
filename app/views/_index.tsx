@@ -1,8 +1,6 @@
 import type { Route } from './+types/_index';
 import { useContext, useState } from 'react';
-
-import { GlobalContext } from '../context/GlobalContext';
-
+import { useGlobalState, useSetIsEditorOpen } from '../context/GlobalContext';
 import type { ContentItem } from '../types/content';
 
 import { articleContent } from '../api/index'; //Test Data
@@ -52,8 +50,8 @@ export function HydrateFallback() {
 }
 
 export default function Index({ loaderData, actionData, params, matches }: Route.ComponentProps) {
-    const { isEditorOpen, setIsEditorOpen } = useContext(GlobalContext);
-    //const [isEditorOpen, setIsEditorOpen] = useState(false);
+    const { isEditorOpen } = useGlobalState();
+    const setIsEditorOpen = useSetIsEditorOpen();
     const [currentContentId, setCurrentContentId] = useState("");
     const [editorMode, setEditorMode] = useState<"create" | "edit">("create");
     //Handle creating new content
